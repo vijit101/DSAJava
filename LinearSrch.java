@@ -9,7 +9,7 @@ public class LinearSrch {
         Scanner sc = new Scanner(System.in);
         int key = sc.nextInt();
         int index = LinearSearch(key, Arraylinear);
-        if (index == -1) {
+        if (index == Integer.MIN_VALUE) {
             System.out.println("Item not found");
         } else {
             System.out.println("Key found at index " + index);
@@ -18,7 +18,7 @@ public class LinearSrch {
     }
 
     public static int LinearSearch(int key, int[] Array) {
-        int index = -1;
+        int index = Integer.MIN_VALUE;
         for (int j = 0; j < Array.length; j++) {
             if (key == Array[j]) {
                 index = j;
