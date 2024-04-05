@@ -12,7 +12,7 @@ public class MatrixSearch {
         int row = 0, col = mymat[0].length - 1;
         while (row < mymat.length && col >= 0) {
             if (mymat[row][col] == key) {
-                System.out.println("Key found " + row + "col" + col);
+                System.out.println("Key found " + row + " col:" + col);
                 return;
             }
 
