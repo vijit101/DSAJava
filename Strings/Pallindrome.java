@@ -12,7 +12,7 @@ public class Pallindrome {
     }
 
     public static boolean checkPallindrome(String getStr) {
-        boolean isfound = true;
+
         int j = getStr.length() - 1;
         for (int i = 0; i < (getStr.length() / 2) + 1; i++) {
             if (getStr.charAt(i) != getStr.charAt(j) && i <= j) {
@@ -20,6 +20,6 @@ public class Pallindrome {
             }
             j--;
         }
-        return isfound;
+        return true;
     }
 }
