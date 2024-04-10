@@ -1,4 +1,4 @@
-package Strings;
+package StringFolder;
 
 import java.util.Scanner;
 
