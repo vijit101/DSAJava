@@ -14,4 +14,9 @@ class Eatables {
     Eatables(String addName) {
         this.Name = addName;
     }
+
+    Eatables(Eatables eat) {
+        this.Name = eat.Name;
+        this.isVeg = eat.isVeg;
+    }
 }
