@@ -4,6 +4,7 @@ public class selectionSort {
 
     public static void main(String[] args) {
         // int[] Myary = { 120, 1, 10, 360, 5, 3, 6, 2, 100 };
+        int[] inverNums = { 3, 2, 11, 5, 1 };
         int[] numbers = {
                 110, 78, 109, 23, 73, 179, 276, 183, 257, 252, 292, 284,
                 340, 181, 160, 205, 116, 322, 73, 126, 340, 326, 10, 51,
@@ -17,6 +18,7 @@ public class selectionSort {
                 8, 175
         };
         selectionSort(numbers);
+        System.out.println(getInversions(inverNums, 0));
         for (int i = 0; i < numbers.length; i++) {
             System.out.println(numbers[i]);
         }
@@ -24,27 +26,38 @@ public class selectionSort {
 
     public static void selectionSort(int[] arr) {
         // Your code goes here
-        int min;
-        int indx = 0;
+
         for (int i = 0; i < arr.length - 1; i++) {
-            min = Integer.MAX_VALUE;
-            for (int j = i; j < arr.length - 1; j++) {
-                if (arr[j] < arr[j + 1]) {
-                    if (min >= arr[j]) {
-                        min = arr[j];
-                        indx = j;
-                    }
-                } else if (arr[j] > arr[j + 1]) {
-                    if (min >= arr[j + 1]) {
-                        min = arr[j + 1];
-                        indx = j + 1;
-                    }
+            int min = i;
+            for (int j = i + 1; j < arr.length - 1; j++) {
+                if (arr[min] > arr[j]) {
+                    min = j;
                 }
             }
             int temp = arr[i];
-            arr[i] = arr[indx];
-            arr[indx] = temp;
+            arr[i] = arr[min];
+            arr[min] = temp;
         }
+
+    }
+
+    public static int getInversions(int[] arr, int n) {
+        // Your code goes here
+        int sumInversionNum = 0;// when swapping we update it with a difference of indices of swapped nums
+        for (int i = 0; i < arr.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[min] > arr[j]) {
+                    min = j;
+                }
+            }
+            sumInversionNum += (min - i);
+            int temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+
+        }
+        return sumInversionNum;
     }
 
 }
