@@ -32,7 +32,7 @@ public class zerooneSort {
             arr[i] = 1;
         }
 
-        for (int i = count0 + count1; i < count1 + count2; i++) {
+        for (int i = count0 + count1; i < arr.length; i++) {
             arr[i] = 2;
         }
     }
