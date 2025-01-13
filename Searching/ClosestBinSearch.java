@@ -1,41 +1,43 @@
+package Searching;
+
 public class ClosestBinSearch {
     public static void main(String[] args) {
         int[] arr = { 1, 2, 3, 4, 5, 10 };
-        int index = binSearch(5, arr);
+        int index = binarySearchClosest(arr, 0, 0, 9);
         System.out.println(index);
     }
 
-    public static int binSearch(int key, int[] arry) {
+    public static int binarySearchClosest(int[] nums, int left, int right, int target) {
         int indx = -1;
         int start = 0;
-        int end = arry.length;
-        int midpt = arry.length / 2;
-        inr diff = -1;
-        for (int i = 0; i <= (arry.length) / 2; i++) {
-            if (key == arry[midpt]) {
+        int end = nums.length;
+        int midpt = nums.length / 2;
+        int diff = Integer.MAX_VALUE;
+        for (int i = 0; i <= (nums.length) / 2; i++) {
+            if (target == nums[midpt]) {
                 indx = midpt;
                 return indx;
-            } else if (key < arry[midpt]) {
+            } else if (target < nums[midpt]) {
                 end = midpt;
+                int dist = nums[midpt] - target;
+                dist = Math.abs(dist);
+                if (diff < dist) {
+                    diff = dist;
+                    indx = midpt;
+                }
                 midpt = (midpt + start) / 2;
-                diff = key - arry[midpt];
-                diff = Math.abs(diff);
 
-            } else if (key > arry[midpt]) {
+            } else if (target > nums[midpt]) {
                 start = midpt;
+                int dist = target - nums[midpt];
+                dist = Math.abs(dist);
+                if (diff > dist) {
+                    diff = dist;
+                    indx = midpt;
+                }
                 midpt = (midpt + end) / 2;
-
             }
         }
         return indx;
     }
-
-    public static int search(int[] nums, int target) {
-        // Write your code here.
-        int indx = -1;
-        return indx;
-    }
-
 }
-
-

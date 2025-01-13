@@ -1,6 +1,6 @@
 package Sorting;
 
-public class bubble {
+public class kthSmallestNum {
     public static void main(String[] args) {
         // int[] Myary = { 120, 1, 10, 360, 5, 3, 6, 2, 100 };
         int[] Myary = {
@@ -12,10 +12,14 @@ public class bubble {
                 655, 165, 234, 242, 239, 721, 614, 775, 138, 339, 972, 509, 856, 901,
                 320, 46, 539, 266, 502, 888, 18
         };
-        Myary = BubbleSort(Myary);
-        for (int i = 0; i < Myary.length; i++) {
-            System.out.println(Myary[i]);
-        }
+        int kthSmallestitem = kthSmallest(Myary, 0, 10); // 10 th smallest in the arry is
+        System.out.println(kthSmallestitem);
+    }
+
+    public static int kthSmallest(int[] arr, int n, int k) {
+        // Your code goes here
+        arr = BubbleSort(arr);
+        return arr[k - 1];
     }
 
     public static int[] BubbleSort(int[] ary) {
