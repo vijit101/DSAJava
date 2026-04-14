@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class D3GroupAnagrams {
 
@@ -12,30 +11,74 @@ public class D3GroupAnagrams {
 
     }
 
-    public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> Answer = new ArrayList<>();
-        List<String> vals = new ArrayList<>();
+    public List<List<String>> groupAnagrams2(String[] strs) {
+
         HashMap<String, List<String>> map = new HashMap<>();
         char[] sortedWord;
         for (int i = 0; i < strs.length; i++) {
             sortedWord = strs[i].toCharArray();
             Arrays.sort(sortedWord);
-            if (map.containsKey(sortedWord)) {
-                vals.add(strs[i]);
-                map.put(sortedWord.toString(), vals);
+            String fullSortedWord = new String(sortedWord);
+            if (map.containsKey(fullSortedWord)) {
+                map.get(fullSortedWord).add(strs[i]);
 
             } else {
+                List<String> vals = new ArrayList<>();
                 vals.add(strs[i]);
-                map.put(sortedWord.toString(), vals);
+                map.put(fullSortedWord, vals);
             }
 
         }
+        List<List<String>> Answer = new ArrayList<>();
 
-        for (map.Entry<String, List<String> e : map.entrySet()) {
-            System.out.println("Key: " + e.getKey() + " Value: " + e.getValue());
-            Answer.add(e.getValue());
+        for (String k : map.keySet()) {
+            System.out.print(map.get(k));
+            Answer.add(map.get(k));
         }
 
         return Answer;
     }
+
+    public List<List<String>> groupAnagrams1(String[] strs) {
+        HashMap<String, List<String>> map = new HashMap<>();
+
+        for (String str : strs) {
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+
+            map.putIfAbsent(key, new ArrayList<>());
+            map.get(key).add(str);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            int[] freq = new int[26];
+            for (char c : str.toCharArray()) {
+                freq[c - 'a']++;
+            }
+
+            StringBuilder keyBuilder = new StringBuilder();
+            for (int count : freq) {
+                keyBuilder.append(count).append('#');
+            }
+            String key = keyBuilder.toString();
+
+            if (map.containsKey(key)) {
+                map.get(key).add(str);
+            } else {
+                List<String> newList = new ArrayList<>();
+                newList.add(str);
+                map.put(key, newList);
+            }
+
+        }
+        return new ArrayList<>(map.values());
+
+    }
+
 }
