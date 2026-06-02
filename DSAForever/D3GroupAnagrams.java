@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class D3GroupAnagrams {
 
@@ -11,72 +12,74 @@ public class D3GroupAnagrams {
 
     }
 
-    public List<List<String>> groupAnagrams2(String[] strs) {
-
-        HashMap<String, List<String>> map = new HashMap<>();
-        char[] sortedWord;
-        for (int i = 0; i < strs.length; i++) {
-            sortedWord = strs[i].toCharArray();
-            Arrays.sort(sortedWord);
-            String fullSortedWord = new String(sortedWord);
-            if (map.containsKey(fullSortedWord)) {
-                map.get(fullSortedWord).add(strs[i]);
-
-            } else {
-                List<String> vals = new ArrayList<>();
-                vals.add(strs[i]);
-                map.put(fullSortedWord, vals);
-            }
-
-        }
-        List<List<String>> Answer = new ArrayList<>();
-
-        for (String k : map.keySet()) {
-            System.out.print(map.get(k));
-            Answer.add(map.get(k));
-        }
-
-        return Answer;
-    }
-
-    public List<List<String>> groupAnagrams1(String[] strs) {
-        HashMap<String, List<String>> map = new HashMap<>();
-
+    public List<List<String>> groupAnagramsSorting(String[] strs) {
+        Map<String, List<String>> mymap = new HashMap<>();
         for (String str : strs) {
-            char[] chars = str.toCharArray();
-            Arrays.sort(chars);
-            String key = new String(chars);
-
-            map.putIfAbsent(key, new ArrayList<>());
-            map.get(key).add(str);
+            char[] strcharTransformed = str.toCharArray();
+            Arrays.sort(strcharTransformed);
+            String key = new String(strcharTransformed);
+            // do not use .tostring as arrays.toString has differet implementation
+            mymap.putIfAbsent(key, new ArrayList<>());
+            mymap.get(key).add(str);
         }
+        return new ArrayList<>(mymap.values());
 
-        return new ArrayList<>(map.values());
+//         List<List<String>> ans = new ArrayList<>();
+// for(List<String> group : mymap.values()) {
+//     ans.add(group);
+// }
+// return ans;
+//or
+// List<List<String>> ans = new ArrayList<>();
+// for(String key : mymap.keySet()) {
+//     ans.add(mymap.get(key));
+// }
+// return ans;
     }
 
     public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<String, List<String>> map = new HashMap<>();
+        Map<String, List<String>> mymap = new HashMap<>();
+
         for (String str : strs) {
+            char[] strcharTransformed = str.toCharArray();
             int[] freq = new int[26];
-            for (char c : str.toCharArray()) {
-                freq[c - 'a']++;
-            }
+            String fKey = new String();
+            for (int i = 0; i < strcharTransformed.length; i++) {
+                freq[strcharTransformed[i]- 'a']++;
 
-            StringBuilder keyBuilder = new StringBuilder();
-            for (int count : freq) {
-                keyBuilder.append(count).append('#');
             }
-            String key = keyBuilder.toString();
-
-            if (map.containsKey(key)) {
-                map.get(key).add(str);
-            } else {
-                List<String> newList = new ArrayList<>();
-                newList.add(str);
-                map.put(key, newList);
+            StringBuilder buildKey = new StringBuilder();
+            for(int i=0;i<freq.length;i++){
+                buildKey.append('#');
+                // adding # as {21,1} and {2,1,1} can become say key 
+                buildKey.append(freq[i]);
             }
+            fKey = buildKey.toString();
+            mymap.putIfAbsent(fKey,new ArrayList<>());
+            mymap.get(fKey).add(str);
 
         }
+        return new ArrayList<>(mymap.values());
+    }
+
+    public List<List<String>> groupAnagrams1(String[] strs) {
+
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String str : strs) {
+            // Step 1: Sort the string to create the key
+            char[] arr = str.toCharArray();
+            Arrays.sort(arr);
+            String key = new String(arr);
+
+            // Step 2: Insert into map
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
+            }
+            map.get(key).add(str);
+        }
+
+// Step 3: Convert map values to result list
         return new ArrayList<>(map.values());
 
     }
