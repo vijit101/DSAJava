@@ -8,28 +8,24 @@ public class D4LongestSubString {
 
     }
 
-    public int lengthOfLongestSubstring1(String s) {
+    public int lengthOfLongestSubstring(String s) {
         int ans = 0;
-        HashSet<Character> mySet = new HashSet<>();
-        int start = 0;
-        int i = start;
-        int len = s.length();
-        char[] chararry = s.toCharArray();
-
-        while ((start < len) && (i < len)) {
-            if (mySet.contains(chararry[i])) {
-                if (ans < (i + 1) - start) {
-                    ans = i + 1;
-                }
+        HashSet<Character> set = new HashSet<>();
+        int start = 0 ;
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            while(set.contains(chars[i])){
+                set.remove(s.charAt(start));
                 start++;
-                i = start;
-                mySet = new HashSet<>();
             }
+            set.add(s.charAt(i));
+            ans = Math.max(ans, i - start + 1);
         }
+
         return ans;
     }
 
-    public int lengthOfLongestSubstring(String s) {
+    public int lengthOfLongestSubstring1(String s) {
         HashSet<Character> set = new HashSet<>();
         int start = 0;
         int ans = 0;

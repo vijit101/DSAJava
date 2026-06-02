@@ -18,7 +18,7 @@ public class D3GroupAnagrams {
             char[] strcharTransformed = str.toCharArray();
             Arrays.sort(strcharTransformed);
             String key = new String(strcharTransformed);
-            // do not use .tostring as arrays.toString has differet implementation
+            // do not use .toString as arrays.toString has differet implementation
             mymap.putIfAbsent(key, new ArrayList<>());
             mymap.get(key).add(str);
         }
@@ -46,7 +46,6 @@ public class D3GroupAnagrams {
             String fKey = new String();
             for (int i = 0; i < strcharTransformed.length; i++) {
                 freq[strcharTransformed[i]- 'a']++;
-
             }
             StringBuilder buildKey = new StringBuilder();
             for(int i=0;i<freq.length;i++){
