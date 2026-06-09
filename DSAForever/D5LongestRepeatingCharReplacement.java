@@ -28,4 +28,34 @@ public class D5LongestRepeatingCharReplacement {
 
         return ans;
     }
+
+    public int characterReplacementBrute(String s, int k) {
+
+        int ans = 0;
+
+        for (int start = 0; start < s.length(); start++) {
+
+            int[] freq = new int[26];
+            int maxFreq = 0;
+
+            for (int end = start; end < s.length(); end++) {
+
+                char ch = s.charAt(end);
+
+                freq[ch - 'A']++;
+
+                maxFreq = Math.max(maxFreq, freq[ch - 'A']);
+
+                int windowLength = end - start + 1;
+
+                int changesNeeded = windowLength - maxFreq;
+
+                if (changesNeeded <= k) {
+                    ans = Math.max(ans, windowLength);
+                }
+            }
+        }
+
+        return ans;
+    }
 }

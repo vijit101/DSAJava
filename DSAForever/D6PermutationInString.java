@@ -11,8 +11,8 @@ public class D6PermutationInString {
         int[] freq = new int[26];
         int subLength = s1.length();
 
-        for (int i = 0; i < s1.length(); i++) {
-
+        for (int i = 0; i < subLength; i++) {
+            
         }
         return ans;
     }
