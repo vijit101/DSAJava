@@ -32,7 +32,7 @@ public class D6PermutationInString {
             }
             
 
-            // might need to do soemthing where I do -1 from freq and then i ++ that way i can use end but not miss any combos 
+            // might need to do soemthing where i do -1 from freq and then i ++ that way i can use end but not miss any combos 
             freqs2[s2CharArray[i] - 'a'] -- ; 
         }
         return ans;
